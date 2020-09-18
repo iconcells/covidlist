@@ -3,9 +3,9 @@ require 'cucumber/rake/task'
 require 'coveralls/rake/task'
 
 unless Rails.env.production?
-  Coveralls::RakeTask.new
+  #Coveralls::RakeTask.new
   namespace :ci do
     desc 'Run all tests and generate a merged coverage report'
-    task tests: [:spec, :cucumber, 'coveralls:push']
+    #task tests: [:spec, :cucumber]   #, 'coveralls:push'
   end
 end
