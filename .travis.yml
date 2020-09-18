@@ -1,0 +1,23 @@
+language: ruby
+rvm:
+- 2.5.8
+before_script:
+- bundle exec rake db:create --all
+- bundle exec rake db:migrate
+script:
+- bundle exec rake ci:tests
+services:
+- postgresql
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: IthMB9XzxAnkmDX0p3lteMU45uWRNTsFHWz3f24JKWJW9AFBspMg6ifu2j38eYMsofgkF2Lur5eRUTMsoMAUNsT3ZGw+g7DeETsRnWQ0l6t8ukWAWpOnj2okQSDOsxPTFMeMd4HlufVMnVLP/rIAexHP9Y50ERv4DX+oiGRqCXruFR3s7LGLcef/pmS/WnJotrvp96ihJwpLpF+jQb8xVBYcsw/N4H8wr4rs+kxOmnhygOCH5V1c+x9bx3hJieUEEjk+EVUR9GdcWHmqJD0BfmIhrz2PRcZGKD1KMFQYyCMtdOdcxfyX8qEDN1gGGaygwePWfkQJjhOUIyd8Qm+0GUS3kkJjSnLwsIzy3i2y4qrqFQhlsY+mFaUA8qWQ/iP5Oc8Xz5x0lEVeTfHir0PKR2V/dl5qE4ulpQbPie8AuXYJ3cPplyH7j+Ugy7kapDadDyj0PL3Plg1vUGjpRTOmPeQV9oLennaePvQ+4If+CQU9jlNqkS+LZzefTlpINVSxNkQ+85lYlohzb7a8Ryw234RBV3PVtJSjfPu76oPlp7Yuw4Zm+1rkGlW0lmxB7HTY5+4YeE5EjAN1ZqGQQPtXpYnVWea+saU4Vl4MRkvPnVMcBCeIzSgnl7Y8fcdqQAP2/s79DNF/aKuSJzYa0fDfiGTYTmsb0zPPBzoCofmmkT0=
+  app:
+    develop: covid-beta
+    master: covid-list
+  on:
+    repo: iconcells/covidlist
+  run:
+    - "rails db:migrate"
